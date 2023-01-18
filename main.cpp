@@ -5,7 +5,7 @@
 
 using namespace std;
 
-int Enemy::enemyCount;
+bool Enemy::allDathFlag;
 
 // ウィンドウのタイトルに表示する文字列
 const char TITLE[] = "LE2C_08_カトウ_オウミ: タイトル";
@@ -17,7 +17,7 @@ const int WIN_WIDTH = 600;
 const int WIN_HEIGHT = 400;
 
 int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine,
-                   _In_ int nCmdShow) {
+	_In_ int nCmdShow) {
 	// ウィンドウモードに設定
 	ChangeWindowMode(TRUE);
 
@@ -51,13 +51,11 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	Enemy* enemy2 = new Enemy;
 	Enemy* enemy3 = new Enemy;
 
-	bool enemyFlag = true;
-
 	// 最新のキーボード情報用
-	char keys[256] = {0};
+	char keys[256] = { 0 };
 
 	// 1ループ(フレーム)前のキーボード情報
-	char oldkeys[256] = {0};
+	char oldkeys[256] = { 0 };
 
 	// ゲームループ
 	while (true) {
@@ -74,12 +72,25 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 		//---------  ここからプログラムを記述  ----------//
 
 		// 更新処理
-		
+		if (keys[KEY_INPUT_SPACE] == true && oldkeys[KEY_INPUT_SPACE] == false)
+		{
+			enemy1->allDathFlag = true;
+		}
 
 		// 描画処理
-		for (int i = 0; i < Enemy::enemyCount; i++) 
+		if (enemy1->allDathFlag == false)
 		{
+			DrawBox(30, 30, 50, 50, GetColor(255, 255, 255), true);
+		}
 
+		if (enemy2->allDathFlag == false)
+		{
+			DrawBox(70, 30, 90, 50, GetColor(255, 255, 255), true);
+		}
+
+		if (enemy3->allDathFlag == false)
+		{
+			DrawBox(100, 30, 120, 50, GetColor(255, 255, 255), true);
 		}
 
 		//---------  ここまでにプログラムを記述  ---------//
