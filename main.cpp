@@ -1,6 +1,11 @@
 #include "DxLib.h"
 #include <stdio.h>
-#include "ChangeScene.h"
+#include <iostream>
+#include "Enemy.h"
+
+using namespace std;
+
+int Enemy::enemyCount;
 
 // ウィンドウのタイトルに表示する文字列
 const char TITLE[] = "LE2C_08_カトウ_オウミ: タイトル";
@@ -42,7 +47,11 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 
 
 	// ゲームループで使う変数の宣言
-	int scene = 0;
+	Enemy* enemy1 = new Enemy;
+	Enemy* enemy2 = new Enemy;
+	Enemy* enemy3 = new Enemy;
+
+	bool enemyFlag = true;
 
 	// 最新のキーボード情報用
 	char keys[256] = {0};
@@ -65,19 +74,13 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 		//---------  ここからプログラムを記述  ----------//
 
 		// 更新処理
-		SceneManger::GetInstance()->ChangeScene(scene);
-
-		if (keys[KEY_INPUT_SPACE] == 1 && oldkeys[KEY_INPUT_SPACE] == 0)
-		{
-			scene += 1;
-		}
-
-		if (scene > 3) 
-		{
-			scene = 0;
-		}
+		
 
 		// 描画処理
+		for (int i = 0; i < Enemy::enemyCount; i++) 
+		{
+
+		}
 
 		//---------  ここまでにプログラムを記述  ---------//
 		// (ダブルバッファ)裏面
